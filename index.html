@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>赵雪艳的Garden</title>
+    <!-- 引入 Google 字体：书法体、小写体、宋体 -->
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;700&display=swap" rel="stylesheet">
+    <!-- 引入 FontAwesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root { --main-green: #5a7d59; --text-dark: #1a1a1a; }
+        /* 1. 基础全局样式 */
+        :root { 
+            --main-green: #5a7d59; 
+            --light-green: rgba(90, 125, 89, 0.1);
+            --text-dark: #1a1a1a; 
+        }
         
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
@@ -18,98 +26,155 @@
             line-height: 1.8; 
         }
 
-        /* 侧边导航栏 */
+        /* 2. 侧边导航栏样式 */
         .side-nav {
             position: fixed; left: 0; top: 0; height: 100vh; width: 220px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px); /* 毛玻璃效果 */
             border-right: 1px solid rgba(255, 255, 255, 0.2);
             padding: 50px 20px;
             display: flex; flex-direction: column; z-index: 1000;
         }
-        .nav-brand { font-family: 'Ma Shan Zheng', cursive; font-size: 2.2rem; color: var(--main-green); margin-bottom: 40px; text-align: center; }
-        .nav-item { text-decoration: none; color: #333; margin: 15px 0; font-size: 1.1rem; font-family: 'Ma Shan Zheng', cursive; transition: 0.3s; padding: 10px; border-radius: 10px; text-align: center;}
-        .nav-item:hover { background: rgba(90, 125, 89, 0.3); color: #000; }
+        .nav-brand { 
+            font-family: 'Ma Shan Zheng', cursive; 
+            font-size: 2.2rem; 
+            color: var(--main-green); 
+            margin-bottom: 40px; 
+            text-align: center; 
+        }
+        .nav-item { 
+            text-decoration: none; 
+            color: #333; 
+            margin: 10px 0; 
+            font-size: 1.1rem; 
+            font-family: 'Ma Shan Zheng', cursive; 
+            transition: 0.3s; 
+            padding: 10px; 
+            border-radius: 10px; 
+            text-align: center;
+        }
+        /* 导航悬停效果 */
+        .nav-item:hover { background: var(--main-green); color: #fff; }
 
+        /* 3. 主内容区布局 */
         .main-content { margin-left: 220px; }
-        .section { min-height: 100vh; padding: 80px 4%; background-size: cover; background-position: center; background-attachment: fixed; }
         
+        .section { 
+            min-height: 100vh; 
+            padding: 80px 4%; 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed; /* 背景视差效果 */
+        }
+        
+        /* 容器毛玻璃卡片 */
         .glass-container { 
             max-width: 1200px; margin: 0 auto; 
-            background: rgba(255, 255, 255, 0.4); 
+            background: rgba(255, 255, 255, 0.7); 
             padding: 50px; border-radius: 30px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
         }
 
-        /* 首页名字优化：减细字重，增加间距 */
+        /* 4. 首页 (Hero Section) 样式 */
         .hero-title {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 5.5rem;
-            font-weight: 300; /* 调细字重，避免成一坨 */
-            letter-spacing: 5px; /* 增加字间距 */
+            font-size: clamp(3rem, 10vw, 5.5rem); /* 响应式字体大小 */
+            font-weight: 300;
+            letter-spacing: 8px;
             color: #fff;
-            padding: 10px 50px;
+            padding: 15px 50px;
             background: rgba(90, 125, 89, 0.6); 
             border-radius: 15px;
             display: inline-block;
-            text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
             margin-bottom: 20px;
         }
         .hero-subtitle {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #fff;
             background: rgba(0, 0, 0, 0.2); 
-            padding: 5px 35px;
+            padding: 8px 35px;
             border-radius: 50px;
             display: inline-block;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
 
+        /* 5. 标题与内容卡片网格 */
         h2.title { font-family: 'Ma Shan Zheng', cursive; font-size: 3.5rem; color: var(--main-green); text-align: center; margin-bottom: 50px; }
-        h3.node-header { font-family: 'ZCOOL XiaoWei'; font-size: 1.8rem; margin: 40px 0 20px; color: #4a634a; border-left: 8px solid var(--main-green); padding-left: 15px; }
+        
+        h3.node-header { 
+            font-family: 'ZCOOL XiaoWei', serif; 
+            font-size: 1.8rem; margin: 60px 0 25px; 
+            color: #4a634a; 
+            border-left: 8px solid var(--main-green); 
+            padding-left: 15px; 
+        }
 
-        /* 核心修改：网格布局自适应 */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; 
+            grid-template-columns: repeat(3, 1fr); /* 默认三列 */
+            gap: 25px; 
         }
 
-        /* 特殊类：用于让右边两个上下放置 */
-        .double-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* 两个卡片之间的间隙 */
-        }
-
+        /* 卡片基础样式 */
         .card { 
-            background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 15px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border: 1px solid #eee; display: flex; flex-direction: column;
-            height: 100%;
+            background: #fff; padding: 25px; border-radius: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            border: 1px solid #f0f0f0; 
+            transition: 0.3s;
         }
-        .card p { font-size: 1.05rem; color: #1a1a1a; font-weight: 500; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        .card p { font-size: 1.05rem; color: #333; }
 
-        .photo-box { background: #fff; padding: 8px; margin-top: 15px; border: 1px solid #f0f0f0; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
-        .photo-box img { width: 100%; display: block; border-radius: 5px; }
+        /* 照片框效果 */
+        .photo-box { background: #fff; padding: 10px; margin-top: 15px; border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .photo-box img { width: 100%; height: auto; display: block; border-radius: 5px; }
 
-        @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } .main-content { margin-left: 0; } .side-nav { display: none; } }
+        /* 6. 个人信息列表样式 */
+        .info-list { list-style: none; }
+        .info-list li { margin: 15px 0; font-size: 1.2rem; border-bottom: 1px dashed #ddd; padding-bottom: 10px; }
+        .info-list strong { color: var(--main-green); margin-right: 10px; }
+
+        /* 7. 朋友板块专用样式 */
+        .friend-card { text-align: center; }
+        .friend-avatar {
+            width: 80px; height: 80px; background: var(--light-green);
+            border-radius: 50%; margin: 0 auto 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--main-green);
+        }
+
+        /* 8. 响应式适配：移动端 */
+        @media (max-width: 1024px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .main-content { margin-left: 0; }
+            .side-nav { display: none; } /* 移动端隐藏侧边栏，实际应用可改为汉堡菜单 */
+            .hero-title { font-size: 3rem; padding: 10px 20px; }
+        }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .glass-container { padding: 25px; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- 侧边导航栏：锚点已修复 -->
     <nav class="side-nav">
         <div class="nav-brand">Snow'Garden</div>
         <a href="#home" class="nav-item">首页入口 HOME</a>
+        <a href="#information" class="nav-item">个人信息 INFO</a>
         <a href="#timeline" class="nav-item">时光之轴 TIMELINE</a>
         <a href="#thinking" class="nav-item">个人思考 THINKING</a>
         <a href="#learning" class="nav-item">学习日志 LEARNING</a>
         <a href="#plan" class="nav-item">人生计划 PLAN</a>
+        <a href="#friends" class="nav-item">好友互动 FRIEND</a>
     </nav>
 
     <div class="main-content">
+        <!-- 首页 -->
         <section class="section" id="home" style="background-image: url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2000'); display: flex; align-items: center; justify-content: center;">
             <div style="text-align: center;">
                 <h1 class="hero-title">赵雪艳</h1><br>
@@ -117,122 +182,142 @@
             </div>
         </section>
 
-        <section class="section" id="timeline" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000');">
+        <!-- 个人信息 -->
+        <section class="section" id="information" style="background: #f8f5ee;">
             <div class="glass-container">
-                <h2 class="title">时光轴</h2>
-
-                <h3 class="node-header">节点1：2002-2009 出生-学前教育</h3>
+                <h2 class="title">个人信息</h2>
                 <div class="grid">
-                    <div class="card"><p>我总共上过两次学前班，第一次学前班听奶奶说只有三天，因为幼稚园的老师觉得我很调皮，那次我似乎放学一个人走在了河边，大人们都很着急，最后是舅舅找到了我，给我劈头盖脸一顿骂，自此我一直很怕他，直到我读大学。</p></div>
-                    <div class="card">
-                        <p>第二个幼稚园里有一个老师奶奶，她与前一个幼稚园的老师不一样，他十分喜欢我，可以说她最喜欢我了，在我生日的时候会给我买新衣服穿，这是独一份的宠爱，有一张照片是生日当天，扎着两个小啾啾，嘴巴嘟嘟的，在吹生日蜡烛。</p>
-                        <div class="photo-box"><img src="birthday.jpg"></div>
-                    </div>
-                    <div class="double-stack">
-                        <div class="card"><p>我也的确是个调皮的孩子，在那个幼稚园里，我至今记得那个午睡房间里浓郁的木头气息，我经常不好好睡午觉，爬到床底下去冒险，那种偷摸的刺激感令我着迷，地板上即使有灰尘也玩的不亦乐乎。</p></div>
-                        <div class="card"><p>我还记得那个幼稚园内部有个小花园，但不经常开放，那里似乎成为了我通向外面世界唯一的地方，那里长满野草野花，阳光照射下来我觉得无比平静，不认为很危险，反倒觉得没人管我的自由感，因为我知道我总会被发现而逃出生天。</p></div>
-                    </div>
-                    <div class="card"><p>每次去上幼稚园，奶奶总会在街上的蛋糕冷饮店，给我买一个五块钱大鸡腿，或者一袋塑料袋封装的甜豆浆，用吸管扎入袋子上端就可以喝了，但这也是个技术活，由于袋子的韧性不容易被扎破。前面独宠我的老师奶奶也会帮我把豆浆放在冷水里降温了再给我喝。</p></div>
-                    <div class="card"><p> 在村里里我算是朋友最广的了，那时候一天的行程也是很满，大家都喜欢和我玩，每次都要预约才可以，而我可以选择我想去哪就去哪，去完他家要去别家，但我又不想把时间浪费在转移战场上，每次都是跑着去跑着来。村里的老太婆总喜欢叫我们野孩子。</p></div>
-                </div>
-
-                <h3 class="node-header">节点2：2009-2018 小学阶段</h3>
-                <div class="grid">
-                    <div class="card"><p>小时候到处奔跑去玩，让我在体育方面有了比同龄女孩强的力量，先是加入了校田径队，参加过一次县运动会，但成绩不算特别突出。那时候训练我们都是最早到学校的学生，六点多就到了，还记得早上都是先训练再吃早饭，早饭是学校食堂专门准备的，感觉到了优待，早饭通常是白粥和小肉包，那时候喜欢喝稀的白粥，因为练完往往很渴，我至今还记得那白粥烫的难以下嘴，但我的胃已经嗷嗷待哺。后面离开田径队是因为跟着一个小男孩不学好，觉得训练辛苦就吊儿郎当，他成功离开了，然后我也离开了。</p></div>
-                    <div class="card"><p>还记得在三年级前，我经常报名参加运动会，其中跳远每次都是千年老二，第一名总是另一个女孩。</p></div>
-                    <div class="double-stack">
-                        <div class="card"><p>在小学的前几年，学校还比较破，灌木丛也多，我们经常在灌木丛中穿梭，寻找西瓜虫，把它蜷起来，变成一粒小球。</p></div>
-                        <div class="card"><p>五年级下册的时候机缘巧合加入乒乓球队，那时候我们班有一个同学从小就练乒乓球，最后我们组获得女子团体第一，我个人获得第二名，差点就打败他了。最后还拿到一笔奖金。</p></div>
-                    </div>
-                </div>
-
-                <h3 class="node-header">节点3：2015-2018 初中阶段</h3>
-                <div class="grid">
-                    <div class="card"><p>对于初中，我最引以为傲的就是我的学习成绩，一开始进入初中，年级排名好像是一百十几名，后面真的是一点一点进步，稳步提升，最后考到了我们县最好的高中。刚入学我的英语老师就提到中考黑马，没想到我自己也成为了那匹黑马。英语老师自己的个人经历也是非常励志，英语都是自学的，姐姐资助他的生活费用。</p></div>
-                </div>
-
-                <h3 class="node-header">节点4：2018-2021 高中阶段</h3>
-                <div class="grid">
-                    <div class="card"><p>高三快高考的那段时间，所有人的精神状态都很神经，晚自习下课就去操场疯，我们玩的游戏是打架、摔跤很暴力的游戏，那时候我们班总共四十几个人，才四个男生。</p></div>
-                    <div class="card">
-                        <p>由于班里只有四个男生，导致我们运动会直接取消团体接力资格。我们班最后派出四个女生比赛，原先是五男五女，最后冲刺感觉全校人都在为我们欢呼。</p>
-                        <div class="photo-box"><img src="3.jpg"></div>
-                    </div>
-                </div>
-
-                <h3 class="node-header">节点5：2021-2025 大学阶段</h3>
-                <div class="grid">
-                    <div class="card">
-                        <p>拿过许许多多的奖项，但现在觉得只要做自己喜欢的事情，认可自然会到来。</p>
-                        <div class="photo-box"><img src="honor.png"></div>
+                    <div class="card" style="grid-column: span 2;">
+                        <ul class="info-list">
+                            <li><strong>姓名：</strong>赵雪艳</li>
+                            <li><strong>MBTI：</strong>ENFP (快乐小狗)</li>
+                            <li><strong>星座：</strong>射手座</li>
+                            <li><strong>生日：</strong>2002.12.07</li>
+                            <li><strong>兴趣爱好：</strong>羽毛球、骑行、乒乓球、健身、徒步、唱歌</li>
+                        </ul>
                     </div>
                     <div class="card">
-                        <p>羽毛球也算是陪伴了我大学四年，大一遇到打球的学长们，有了一群稳定的球友：徐文杰、朱德征、刘国菲、谢京、宓佳成</p>
-                        <div class="photo-box"><img src="badmintion.jpg"></div>
-                    </div>
-                    <div class="card">
-                        <p>毕业照啦</p>
-                        <div class="photo-box"><img src="graduate.jpg"></div>
-                    </div>
-                    <div class="card">
-                        <p>大学最特别的经历莫过于参加了SWT项目，在美国阿拉斯加待了三个月，遇到了Ruth一家，带我到处去玩。</p>
-                        <div class="photo-box"><img src="ruth.jpg"></div>
-                    </div>
-                </div>
-                
-                <h3 class="node-header">节点6：2025-2028 研究生在读</h3>
-                <div class="grid">
-                    <div class="card">
-                        <p>爸爸陪我开学来报道，新的征程开启。</p>
-                        <div class="photo-box"><img src="go.jpg"></div>
-                    </div>
-                    <div class="card">
-                        <p>自己一个人去惠州三天两晚冲浪，认识了外贸四人，让我想做外贸。认识了晓庆教练，让我知道了原来工作不一定是在办公楼，你可以做你爱做的事情，寻找乌托邦，晓庆教练的生活是我向往的样子。</p>
-                        <div class="photo-box"><img src="zipai.jpg"></div>
+                        <p>座右铭：</p>
+                        <h3 style="font-family: 'Ma Shan Zheng'; color: var(--main-green); margin-top: 15px;">“生如夏花之绚烂”</h3>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- 时光轴 -->
+        <section class="section" id="timeline" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000');">
+            <div class="glass-container">
+                <h2 class="title">时光轴</h2>
+
+                <h3 class="node-header">2002-2009 出生-学前教育</h3>
+                <div class="grid">
+                    <div class="card"><p>关于幼稚园的记忆，是调皮的冒险和河边的找寻。那时候怕舅舅，直到上了大学才缓解。</p></div>
+                    <div class="card">
+                        <p>记得那位最喜欢我的老师奶奶，生日那天她给我买了新衣服，两个小啾啾的瞬间被相机定格。</p>
+                        <div class="photo-box"><img src="birthday.jpg" alt="生日照"></div>
+                    </div>
+                    <div class="card"><p>幼稚园午睡房里的木头味，还有爬到床底冒险的偷摸刺激感，是我童年最迷恋的自由。</p></div>
+                </div>
+
+                <h3 class="node-header">2009-2018 小学阶段</h3>
+                <div class="grid">
+                    <div class="card"><p>田径队的日子：早上六点多的白粥和小肉包，那是拼搏后的优待。</p></div>
+                    <div class="card"><p>乒乓球台上的较量：五年级加入球队，拿到女子团体第一和个人第二，还有一笔小奖金。</p></div>
+                </div>
+
+                <h3 class="node-header">2015-2018 初中阶段</h3>
+                <div class="grid">
+                    <div class="card"><p>从一百多名到稳步提升，最终成为中考“黑马”考入县里最好的高中。那位励志的英语老师至今让我难忘。</p></div>
+                </div>
+
+                <h3 class="node-header">2021-2025 大学阶段</h3>
+                <div class="grid">
+                    <div class="card"><p>阿拉斯加的三个月：SWT项目让我遇到了Ruth一家，那是看世界最直接的方式。</p></div>
+                    <div class="card"><p>羽毛球馆里的友情：大一开始，徐文杰、朱德征等球友成了四年的陪伴。</p></div>
+                    <div class="card">
+                        <p>毕业了！</p>
+                        <div class="photo-box"><img src="graduate.jpg" alt="毕业照"></div>
+                    </div>
+                </div>
+                
+                <h3 class="node-header">2025-2028 研究生在读</h3>
+                <div class="grid">
+                    <div class="card"><p>新的征程：在惠州冲浪的日子，认识了晓庆教练，也找到了我向往的生活方式。</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 个人思考 -->
         <section class="section" id="thinking" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2000');">
             <div class="glass-container">
                 <h2 class="title">个人思考</h2>
                 <div class="grid">
                     <div class="card" style="grid-column: span 3;">
-                        <p style="font-size: 1.5rem; font-family: 'Ma Shan Zheng'; color: var(--main-green);">“不要试图改变一个人”</p>
-                        <p style="margin-top:20px;">研一开学，老师说我要主动思考。但我有我自己的节奏，不想被强行修正。我有我不被改变的自由。</p>
+                        <p style="font-size: 1.8rem; font-family: 'Ma Shan Zheng'; color: var(--main-green); text-align: center;">“不要试图改变一个人”</p>
+                        <p style="margin-top:20px; text-align: center;">我有我自己的节奏，不想被强行修正。我有我不被改变的自由。</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- 学习日志 -->
         <section class="section" id="learning" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000');">
             <div class="glass-container">
                 <h2 class="title">学习日志</h2>
                 <div class="grid">
-                    <div class="card"><p>自学外贸知识，试图构建属于自己的外贸事业体系。</p></div>
-                    <div class="card"><p>在惠州尝试冲浪，在教练帮助下可以成功在板上站起。</p></div>
+                    <div class="card"><p><strong>外贸探索：</strong>自学外贸知识，构建属于自己的事业体系。</p></div>
+                    <div class="card"><p><strong>技能进阶：</strong>在惠州挑战冲浪，成功在板上站起的一刻是无与伦比的。</p></div>
                     <div class="card">
-                        <p>在海边的沉思。</p>
-                        <div class="photo-box"><img src="sea.jpg"></div>
+                        <p>海边沉思：</p>
+                        <div class="photo-box"><img src="sea.jpg" alt="海边"></div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- 人生计划 -->
         <section class="section" id="plan">
             <div class="glass-container">
                 <h2 class="title">人生计划</h2>
                 <div class="grid">
-                    <div class="card"><h3>🌍 潜水</h3><p>去菲律宾潜水旅游</p></div>
-                    <div class="card"><h3>🎯 射击</h3><p>尝试一次实弹射击</p></div>
-                    <div class="card"><h3>⛷️ 滑雪</h3><p>学习滑雪</p></div>
+                    <div class="card"><h3>🌍 潜水</h3><p>去菲律宾潜水，探索深蓝。</p></div>
+                    <div class="card"><h3>🎯 射击</h3><p>尝试实弹射击，感受专注。</p></div>
+                    <div class="card"><h3>⛷️ 滑雪</h3><p>系统学习滑雪，在雪地飞驰。</p></div>
                 </div>
             </div>
         </section>
 
-        <footer style="text-align: center; padding: 40px; color: #888; background: #fff;">
-            © 赵雪艳 | 2026 | 记录生长的痕迹
+        <!-- 朋友板块：增加了头像和详细样式 -->
+        <section class="section" id="friends" style="background: #f8f5ee;">
+            <div class="glass-container">
+                <h2 class="title">我的朋友</h2>
+                <div class="grid">
+                    <div class="card friend-card">
+                        <div class="friend-avatar"><i class="fas fa-user"></i></div>
+                        <h3>徐文杰</h3>
+                        <p><strong>关系：</strong>大学球友</p>
+                        <p><strong>备注：</strong>四年稳定搭子</p>
+                    </div>
+                    <div class="card friend-card">
+                        <div class="friend-avatar"><i class="fas fa-user"></i></div>
+                        <h3>晓庆教练</h3>
+                        <p><strong>启迪：</strong>冲浪乌托邦</p>
+                        <p><strong>向往：</strong>自在的生活</p>
+                    </div>
+                    <div class="card friend-card">
+                        <div class="friend-avatar"><i class="fas fa-user"></i></div>
+                        <h3>Ruth 一家</h3>
+                        <p><strong>回忆：</strong>阿拉斯加回忆</p>
+                        <p><strong>坐标：</strong>USA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer style="text-align: center; padding: 60px; color: #888; background: #fff;">
+            © 赵雪艳 | 2026 | 记录生长的痕迹<br>
+            <small style="margin-top: 10px; display: block;">Stay hungry, Stay foolish.</small>
         </footer>
     </div>
 </body>
